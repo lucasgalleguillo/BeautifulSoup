@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
@@ -13,8 +14,6 @@ def scrape_website(url):
         # Create a BeautifulSoup object
         soup = BeautifulSoup(response.content, 'html.parser')
 
-        # Perform web scraping here and extract the desired information
-        # For example, let's extract all the reviews from the webpage
         reviews = soup.find_all('div', class_='review')
 
         # Return the extracted information
@@ -41,7 +40,7 @@ def main():
     # Create a sidebar menu
     st.sidebar.title("Menu")
     pages = ["Home", "Córdoba", "Argentina", "Global"]
-    selected_page = st.sidebar.selectbox("Seleccione una página", pages)
+    selected_page = st.sidebar.selectbox("Select a page", pages)
     
 
     if selected_page == "Home":
@@ -50,66 +49,55 @@ def main():
 
     elif selected_page == "Córdoba":
         st.header("Córdoba news")
-        st.write("Ingrese la URL de una página y haga clic en el botón 'Extraer' para obtener las opiniones.")
+        st.markdown("Here we can find the latest news from **Córdoba**")
+        
 
-        # Get user input
-        url = st.text_input("Ingrese una URL")
+        noticias_mundo = ["Noticia 1", "Noticia 2", "Noticia 3"]
+        noticias_argentina = ["Noticia A", "Noticia B", "Noticia C"]
+        noticias_cordoba = ["Noticia X", "Noticia Y", "Noticia Z"]
 
-        # Create a button to trigger the scraping process
-        if st.button("Extraer"):
-            # Call the scrape_website function
-            reviews = scrape_website(url)
+        # Crear un diccionario con las listas
+        data = {
+            "Mundo": noticias_mundo,
+            "Argentina": noticias_argentina,
+            "Córdoba": noticias_cordoba
+        }
 
-            if reviews is not None:
-                # Display the extracted reviews
-                st.header("Opiniones Extraídas")
-                for review in reviews:
-                    st.write(review.text)
-            else:
-                # Display an error message if the scraping failed
-                st.write("La extracción falló. Por favor, verifique la URL e intente nuevamente.")
+        # Crear un DataFrame con el diccionario de datos
+        df = pd.DataFrame(data)
+
+        # Mostrar la tabla en Streamlit
+        st.dataframe(df)
 
     elif selected_page == "Argentina":
-        st.header("Argentine news")
-        st.write("Ingrese la URL de una página y haga clic en el botón 'Extraer' para obtener las opiniones.")
+        col1, col2 = st.columns(2)
 
-        # Get user input
-        url = st.text_input("Ingrese una URL")
+        with col1:
+            st.header("Argentine news")
+            st.markdown("Here we can find the latest news from **Argentina**")
 
-        # Create a button to trigger the scraping process
-        if st.button("Extraer"):
-            # Call the scrape_website function
-            reviews = scrape_website(url)
+        with col2:
+            option = st.selectbox(
+                "How would you like to read?",
+                ("All", "Sport", "Economy", "Society"),
+            )
 
-            if reviews is not None:
-                # Display the extracted reviews
-                st.header("Opiniones Extraídas")
-                for review in reviews:
-                    st.write(review.text)
-            else:
-                # Display an error message if the scraping failed
-                st.write("La extracción falló. Por favor, verifique la URL e intente nuevamente.")
+        
     
     elif selected_page == "Global":
-        st.header("Global news")
-        st.write("Ingrese la URL de una página y haga clic en el botón 'Extraer' para obtener las opiniones.")
+        col1, col2 = st.columns(2)
 
-        # Get user input
-        url = st.text_input("Ingrese una URL")
+        with col1:
+            st.header("Global news")
+            st.markdown("Here we can find the latest news from the **World**")
 
-        # Create a button to trigger the scraping process
-        if st.button("Extraer"):
-            # Call the scrape_website function
-            reviews = scrape_website(url)
 
-            if reviews is not None:
-                # Display the extracted reviews
-                st.header("Opiniones Extraídas")
-                for review in reviews:
-                    st.write(review.text)
-            else:
-                # Display an error message if the scraping failed
-                st.write("La extracción falló. Por favor, verifique la URL e intente nuevamente.")
+        with col2:
+            option = st.selectbox(
+                "How would you like to read?",
+                ("All", "Science", "Economy", "Culture"),
+            )
+
 
 if __name__ == '__main__':
     main()
