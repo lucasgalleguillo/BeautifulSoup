@@ -41,27 +41,27 @@ def main():
     st.sidebar.title("Menu")
     pages = ["Home", "Córdoba", "Argentina", "Global"]
     selected_page = st.sidebar.selectbox("Select a page", pages)
-    
 
     if selected_page == "Home":
         st.header("¡Well come, we are Newsline!")
         st.markdown("We have all the news you want, from **wherever** you want and **whenever** you want")
 
+
     elif selected_page == "Córdoba":
         st.header("Córdoba news")
         st.markdown("Here we can find the latest news from **Córdoba**")
         
+        col1, col2 = st.columns(2)
 
-        noticias_mundo = ["Noticia 1", "Noticia 2", "Noticia 3"]
-        noticias_argentina = ["Noticia A", "Noticia B", "Noticia C"]
-        noticias_cordoba = ["Noticia X", "Noticia Y", "Noticia Z"]
+        # Add content to the first column
+        with col1:
+            st.header("Title")
+            st.subheader("Url")
 
-        # Crear un diccionario con las listas
-        data = {
-            "Mundo": noticias_mundo,
-            "Argentina": noticias_argentina,
-            "Córdoba": noticias_cordoba
-        }
+        # Add content to the second column
+        with col2:
+            st.header("Image")
+
 
         # Crear un DataFrame con el diccionario de datos
         df = pd.DataFrame(data)
@@ -82,7 +82,16 @@ def main():
                 ("All", "Sport", "Economy", "Society"),
             )
 
-        
+        col1, col2 = st.columns(2)
+
+        # Add content to the first column
+        with col1:
+            st.header("Title")
+            st.subheader("Url")
+
+        # Add content to the second column
+        with col2:
+            st.header("Image")
     
     elif selected_page == "Global":
         col1, col2 = st.columns(2)
@@ -97,6 +106,17 @@ def main():
                 "How would you like to read?",
                 ("All", "Science", "Economy", "Culture"),
             )
+        
+        col1, col2 = st.columns(2)
+
+        # Add content to the first column
+        with col1:
+            st.header("Title")
+            st.subheader("Url")
+
+        # Add content to the second column
+        with col2:
+            st.header("Image")
 
 
 if __name__ == '__main__':
