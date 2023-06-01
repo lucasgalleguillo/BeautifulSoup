@@ -10,6 +10,7 @@ def cordoba_info():
     cont = 0
     titules_list = list()
     urls_list = list()
+    urls_notice = list()
 
     for titulares_imp in titulares_cba:
         if cont != 7:
@@ -21,15 +22,19 @@ def cordoba_info():
             else:
                 url = img.get("data-src")
             
+            notice = titulares_imp.find("a")
+            url_notice = "https://viapais.com.ar" + notice.get("href")
+            
             titules_list.append(titule)
             urls_list.append(url)
-            
+            urls_notice.append(url_notice)
+
+            print(url_notice)
             cont = cont +1
         else:
             break
 
-    print(urls_list)
-    print(titules_list)
+    return urls_list, titules_list, urls_notice
 
 # # ------------------------------------------------------------------------    
 
@@ -64,14 +69,10 @@ def mundo_info(url_page, class_li, type_titule):
         else:
             break
 
-    print(titules_list)
-    print(url_list)
-    print(url_notice_list)
+    return titules_list, url_list,url_notice_list
+    
+# # ------------------------------------------------------------------------    
 
-
-        
-
-# -------------------------------------------------------------------------------------------------
 
 def arg_info(url_page,class_a, type_title, calss_type, num_notice):
     page = requests.get(url_page)
@@ -91,7 +92,7 @@ def arg_info(url_page,class_a, type_title, calss_type, num_notice):
             
             img = titulares_imp.find("img")
             url = img.get("src")
-            url_notice = titulares_imp.find_previous("a")["href"]
+            url_notice = "https://www.infobae.com/tag/argentina" + titulares_imp.find_previous("a")["href"]
                
             titules_list.append(titule)
             url_list.append(url)
@@ -101,38 +102,32 @@ def arg_info(url_page,class_a, type_title, calss_type, num_notice):
         else:
             break
 
-    print(titules_list)
-    print(url_list)
-    print(url_notice_list)
-
-
+    return titules_list, url_list, url_notice_list
+    
             
 
 def pag_categoria(pag, categoria):
     if pag == "bbc":
         match categoria:
             case "inicio":
-                mundo_info("https://www.bbc.com/mundo", "ebmt73l0 bbc-lpu9rr e13i2e3d1", "h3")
+                return mundo_info("https://www.bbc.com/mundo", "ebmt73l0 bbc-lpu9rr e13i2e3d1", "h3")
             case "economia":
-                mundo_info("https://www.bbc.com/mundo/topics/c06gq9v4xp3t", "bbc-t44f9r", "h2")
+                return mundo_info("https://www.bbc.com/mundo/topics/c06gq9v4xp3t", "bbc-t44f9r", "h2")
             case "ciencia":
-                mundo_info("https://www.bbc.com/mundo/topics/ckdxnw959n7t", "bbc-t44f9r", "h2")
+                return mundo_info("https://www.bbc.com/mundo/topics/ckdxnw959n7t", "bbc-t44f9r", "h2")
             case "cultura":
-                mundo_info("https://www.bbc.com/mundo/topics/c2dwq9zyv4yt", "bbc-t44f9r", "h2")
+                return mundo_info("https://www.bbc.com/mundo/topics/c2dwq9zyv4yt", "bbc-t44f9r", "h2")
     
     elif pag=="infobae":
         match categoria:
             case "inicio":
-                arg_info("https://www.infobae.com/tag/argentina", "d23-feed-list-card", "h2", "a", 3)
+                return arg_info("https://www.infobae.com/tag/argentina", "d23-feed-list-card", "h2", "a", 3)
             case "economia":
-                arg_info("https://www.infobae.com/economia/", "d23-story-card-ctn", "h2", "div", 3)
+                return arg_info("https://www.infobae.com/economia/", "d23-story-card-ctn", "h2", "div", 3)
             case "deportes":
-                arg_info("https://www.infobae.com/deportes/","d23-story-card-ctn","h2", "div", 3)
+                return arg_info("https://www.infobae.com/deportes/","d23-story-card-ctn","h2", "div", 3)
             case "sociedad":
-                arg_info("https://www.infobae.com/sociedad/","d23-story-card-ctn","h2", "a", 3)
+                return arg_info("https://www.infobae.com/sociedad/","d23-story-card-ctn","h2", "a", 3)
         
     else:
-        cordoba_info()
-
-if __name__ == "__main__":
-    pag_categoria("inicio", 1)
+        return cordoba_info()
