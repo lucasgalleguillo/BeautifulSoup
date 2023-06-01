@@ -41,27 +41,39 @@ def main():
     st.sidebar.title("Menu")
     pages = ["Home", "Córdoba", "Argentina", "Global"]
     selected_page = st.sidebar.selectbox("Select a page", pages)
+    
 
     if selected_page == "Home":
         st.header("¡Well come, we are Newsline!")
         st.markdown("We have all the news you want, from **wherever** you want and **whenever** you want")
 
-
     elif selected_page == "Córdoba":
         st.header("Córdoba news")
         st.markdown("Here we can find the latest news from **Córdoba**")
         
-        col1, col2 = st.columns(2)
 
-        # Add content to the first column
-        with col1:
-            st.header("Title")
-            st.subheader("Url")
+        datos = [
+        {
+            'titulo': 'MESSISMO',
+            'texto': 'Messi el mejor do mundo',
+            'imagen': 'https://www.cleverfiles.com/howto/wp-content/uploads/2018/03/minion.jpg'
+        },
+        {
+            'titulo': 'ANTONELISMO',
+            'texto': 'Texto 2',
+            'imagen': 'https://www.cleverfiles.com/howto/wp-content/uploads/2018/03/minion.jpg'
+        },
+        # Agrega más elementos si es necesario
+        ]
 
-        # Add content to the second column
-        with col2:
-            st.header("Image")
+        # Crear un DataFrame de Pandas con los datos
+        df = pd.DataFrame(datos)
 
+        for i, dato in df.iterrows():
+            col1, col2 = st.columns([2, 1])
+            col1.title(dato['titulo'])
+            col1.write(dato['texto'])
+            col2.image(dato['imagen'], width=200)
 
     elif selected_page == "Argentina":
         col1, col2 = st.columns(2)
@@ -76,16 +88,7 @@ def main():
                 ("All", "Sport", "Economy", "Society"),
             )
 
-        col1, col2 = st.columns(2)
-
-        # Add content to the first column
-        with col1:
-            st.header("Title")
-            st.subheader("Url")
-
-        # Add content to the second column
-        with col2:
-            st.header("Image")
+        
     
     elif selected_page == "Global":
         col1, col2 = st.columns(2)
@@ -100,17 +103,6 @@ def main():
                 "How would you like to read?",
                 ("All", "Science", "Economy", "Culture"),
             )
-        
-        col1, col2 = st.columns(2)
-
-        # Add content to the first column
-        with col1:
-            st.header("Title")
-            st.subheader("Url")
-
-        # Add content to the second column
-        with col2:
-            st.header("Image")
 
 
 if __name__ == '__main__':
