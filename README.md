@@ -1,7 +1,7 @@
 # Competitive Connection - Beautiful Soup
 ## Summarize
 In this project we are going to do **Web Scraping** using the *Beautiful Soup library*, ¿What will it consist of? Basically we will create a news page. Using the scraped data we extract a lot of news from different pages, one of an international content, another for a national and the other one for a local content.
-The news are going to have 3 items, the title, the image and the url of the page
+The news are going to have 3 items, the title, the image and the url of the page.
 
 ## Problematic
 This tool comes to solve a public inconvenience when having to look for news from different parts of the world on different pages, placing all that news on a single website
