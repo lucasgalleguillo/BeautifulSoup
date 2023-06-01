@@ -63,12 +63,6 @@ def main():
             st.header("Image")
 
 
-        # Crear un DataFrame con el diccionario de datos
-        df = pd.DataFrame(data)
-
-        # Mostrar la tabla en Streamlit
-        st.dataframe(df)
-
     elif selected_page == "Argentina":
         col1, col2 = st.columns(2)
 
