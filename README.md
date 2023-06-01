@@ -4,7 +4,7 @@ In this project we are going to do **Web Scraping** using the *Beautiful Soup li
 The news are going to have 3 items, the title, the image and the url of the page.
 
 ## Problematic
-This tool comes to solve a public inconvenience when having to look for news from different parts of the world on different pages, placing all that news on a single website
+This tool comes to solve a public inconvenience when having to look for news from different parts of the world on different pages, placing all that news on a single website.
 
 ## Installation and Set Up
 To install all the packages you will need run the followings commands in your terminal.
