@@ -2,6 +2,8 @@ import streamlit as st
 import requests
 from bs4 import BeautifulSoup
 
+st.set_page_config(page_title = "Newsline", page_icon = ":newspaper:", layout = "wide")
+
 def scrape_website(url):
     # Send a GET request to the URL
     response = requests.get(url)
@@ -24,21 +26,30 @@ def scrape_website(url):
 
 # Streamlit app
 def main():
-    # Set title and description
-    st.title("Web Scraping de Opiniones")
-    st.write("Esta es una aplicacion con el objetivo de realizar web scraping de opiniones destacadas de ciertos libros.")
+
+    st.markdown(
+    """
+    <style>
+    body {
+        background-color: #0E1117;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+    )
 
     # Create a sidebar menu
-    st.sidebar.title("Menú")
-    pages = ["Inicio", "Web Scraping", "Acerca de"]
+    st.sidebar.title("Menu")
+    pages = ["Home", "Córdoba", "Argentina", "Global"]
     selected_page = st.sidebar.selectbox("Seleccione una página", pages)
+    
 
-    if selected_page == "Inicio":
-        st.header("¡Bienvenido!")
-        st.write("Esta es una aplicación de web scraping que extrae opiniones de páginas web.")
+    if selected_page == "Home":
+        st.header("¡Well come, we are Newsline!")
+        st.markdown("We have all the news you want, from **wherever** you want and **whenever** you want")
 
-    elif selected_page == "Web Scraping":
-        st.header("Web Scraping de Opiniones")
+    elif selected_page == "Córdoba":
+        st.header("Córdoba news")
         st.write("Ingrese la URL de una página y haga clic en el botón 'Extraer' para obtener las opiniones.")
 
         # Get user input
@@ -58,9 +69,47 @@ def main():
                 # Display an error message if the scraping failed
                 st.write("La extracción falló. Por favor, verifique la URL e intente nuevamente.")
 
-    elif selected_page == "Acerca de":
-        st.header("Acerca de nosotros")
-        st.write("Esta es una aplicación de web scraping desarrollada por alumnos de 6to año del colegio Villada con Streamlit y BeautifulSoup en Python.")
+    elif selected_page == "Argentina":
+        st.header("Argentine news")
+        st.write("Ingrese la URL de una página y haga clic en el botón 'Extraer' para obtener las opiniones.")
+
+        # Get user input
+        url = st.text_input("Ingrese una URL")
+
+        # Create a button to trigger the scraping process
+        if st.button("Extraer"):
+            # Call the scrape_website function
+            reviews = scrape_website(url)
+
+            if reviews is not None:
+                # Display the extracted reviews
+                st.header("Opiniones Extraídas")
+                for review in reviews:
+                    st.write(review.text)
+            else:
+                # Display an error message if the scraping failed
+                st.write("La extracción falló. Por favor, verifique la URL e intente nuevamente.")
+    
+    elif selected_page == "Global":
+        st.header("Global news")
+        st.write("Ingrese la URL de una página y haga clic en el botón 'Extraer' para obtener las opiniones.")
+
+        # Get user input
+        url = st.text_input("Ingrese una URL")
+
+        # Create a button to trigger the scraping process
+        if st.button("Extraer"):
+            # Call the scrape_website function
+            reviews = scrape_website(url)
+
+            if reviews is not None:
+                # Display the extracted reviews
+                st.header("Opiniones Extraídas")
+                for review in reviews:
+                    st.write(review.text)
+            else:
+                # Display an error message if the scraping failed
+                st.write("La extracción falló. Por favor, verifique la URL e intente nuevamente.")
 
 if __name__ == '__main__':
     main()
