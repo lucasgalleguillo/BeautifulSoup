@@ -31,10 +31,7 @@ Run this command in your terminal to run the proyect
 We are going to use the followings libraries:
 * beautifulsoup4 
 * requests
-<<<<<<< HEAD
 * streamlit
-=======
->>>>>>> ui_branch
 
 ## Developers
 * Bisio Facundo
