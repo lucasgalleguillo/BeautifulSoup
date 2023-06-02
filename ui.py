@@ -36,7 +36,6 @@ def main():
     if selected_page == "Home":
         st.header("¡Bienvenido, esto es Newsline!")
         st.markdown("### Las noticias ***que quieras***, de ***donde quieras*** y ***cuando quieras***")
-        st.image("https://assets.stickpng.com/images/5a0acb755a997e1c2cea10be.png")
         st.markdown("Seguinos en Instagram, Facebook, Twitter, como: 'Newsline_on'")
 
     elif selected_page == "Córdoba":
@@ -234,9 +233,9 @@ def main():
 
             for i, dato in df.iterrows():
                 col1, col2 = st.columns([2, 1])
-                col1.title(dato['titulo'])
+                col1.subheader(dato['titulo'])
                 col1.write(dato['texto'])
-                col2.image(dato['imagen'], width=600) 
+                col2.image(dato['imagen'], width=400) 
 
 if __name__ == '__main__':
     main()
