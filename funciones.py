@@ -38,7 +38,7 @@ def cordoba_info():
 
 # # ------------------------------------------------------------------------    
 
-def mundo_info(url_page, class_li, type_titule):
+def mundo_info(url_page, class_li, type_titule, val):
 
     page = requests.get(url_page)
     soup = BeautifulSoup(page.content, "html.parser")
@@ -59,7 +59,10 @@ def mundo_info(url_page, class_li, type_titule):
             url = img.get("src")
             
             notice = titulares_imp.find("a")
-            url_notice = notice.get("href")
+            if val == 1:
+                url_notice = "https://www.bbc.com" + notice.get("href")
+            else:
+                url_notice = notice.get("href")
                 
             titules_list.append(titule)
             url_list.append(url)
@@ -110,13 +113,13 @@ def pag_categoria(pag, categoria):
     if pag == "bbc":
         match categoria:
             case "inicio":
-                return mundo_info("https://www.bbc.com/mundo", "ebmt73l0 bbc-lpu9rr e13i2e3d1", "h3")
+                return mundo_info("https://www.bbc.com/mundo", "ebmt73l0 bbc-lpu9rr e13i2e3d1", "h3", 1)
             case "economia":
-                return mundo_info("https://www.bbc.com/mundo/topics/c06gq9v4xp3t", "bbc-t44f9r", "h2")
+                return mundo_info("https://www.bbc.com/mundo/topics/c06gq9v4xp3t", "bbc-t44f9r", "h2", 2)
             case "ciencia":
-                return mundo_info("https://www.bbc.com/mundo/topics/ckdxnw959n7t", "bbc-t44f9r", "h2")
+                return mundo_info("https://www.bbc.com/mundo/topics/ckdxnw959n7t", "bbc-t44f9r", "h2", 2)
             case "cultura":
-                return mundo_info("https://www.bbc.com/mundo/topics/c2dwq9zyv4yt", "bbc-t44f9r", "h2")
+                return mundo_info("https://www.bbc.com/mundo/topics/c2dwq9zyv4yt", "bbc-t44f9r", "h2", 2)
     
     elif pag=="infobae":
         match categoria:
@@ -132,5 +135,3 @@ def pag_categoria(pag, categoria):
     else:
         return cordoba_info()
 
-var=pag_categoria("infobae", "sociedad")
-print(var)
