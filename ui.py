@@ -31,15 +31,17 @@ def main():
 
     st.sidebar.title("Menu")
     pages = ["Home", "Córdoba", "Argentina", "Global"]
-    selected_page = st.sidebar.selectbox("Select a page", pages)
+    selected_page = st.sidebar.selectbox("Seleciona una página", pages)
     
     if selected_page == "Home":
-        st.header("¡Well come, we are Newsline!")
-        st.markdown("We have all the news you want, from **wherever** you want and **whenever** you want")
+        st.header("¡Bienvenido, esto es Newsline!")
+        st.markdown("### Las noticias ***que quieras***, de ***donde quieras*** y ***cuando quieras***")
+        st.image("https://assets.stickpng.com/images/5a0acb755a997e1c2cea10be.png")
+        st.markdown("Seguinos en Instagram, Facebook, Twitter, como: 'Newsline_on'")
 
     elif selected_page == "Córdoba":
-        st.header("Córdoba news")
-        st.markdown("Here we can find the latest news from **Córdoba**")
+        st.header("Noticias de Córdoba")
+        st.markdown("Podrás encontrar las últimas noticias de **Córdoba**")
         
         datos = [
         {
@@ -82,8 +84,8 @@ def main():
         col1, col2 = st.columns(2)
 
         with col1:
-            st.header("Argentine news")
-            st.markdown("Here we can find the latest news from **Argentina**")
+            st.header("Noticias de Argentina")
+            st.markdown("Podrás encontrar las últimas noticias de **Argentina**")
 
         datos = [
         {
@@ -162,8 +164,8 @@ def main():
         col1, col2 = st.columns(2)
 
         with col1:
-            st.header("Global news")
-            st.markdown("Here we can find the latest news from the **World**")
+            st.header("Noticias Globales")
+            st.markdown("Podrás encontrar las últimas noticias del **Mundo**")
 
 
             datos = [
@@ -235,7 +237,7 @@ def main():
                 col1.title(dato['titulo'])
                 col1.write(dato['texto'])
                 col2.image(dato['imagen'], width=600) 
-                
+
 if __name__ == '__main__':
     main()
 
