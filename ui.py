@@ -75,7 +75,7 @@ def main():
 
         for i, dato in df.iterrows():
             col1, col2 = st.columns([2, 1])
-            col1.title(dato['titulo'])
+            col1.subheader(dato['titulo'])
             col1.write(dato['texto'])
             col2.image(dato['imagen'], width=400)
 
@@ -87,6 +87,7 @@ def main():
             st.markdown("Podrás encontrar las últimas noticias de **Argentina**")
 
         datos = [
+
         {
             'titulo': argi[0][0],
             'texto': argi[2][1],
@@ -102,7 +103,7 @@ def main():
             'texto': argi[2][0],
             'imagen': argi[1][2],
         },
-
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""#
         {
             'titulo': arge[0][0],
             'texto': arge[2][1],
@@ -118,35 +119,36 @@ def main():
             'texto': arge[2][0],
             'imagen': arge[1][2],
         },
-        {
-            'titulo': argd[0][1],
-            'texto': argd[2][0],
-            'imagen': argd[1][1],
-        },
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""#
         {
             'titulo': argd[0][0],
-            'texto': argd[2][2],
+            'texto': argd[2][1],
             'imagen': argd[1][0],
         },
         {
+            'titulo': argd[0][1],
+            'texto': argd[2][2],
+            'imagen': argd[1][1],
+        },
+        {
             'titulo': argd[0][2],
-            'texto': argd[2][1],
+            'texto': argd[2][0],
             'imagen': argd[1][2],
         },
-
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""#
         {
             'titulo': args[0][0],
-            'texto': args[2][0],
+            'texto': args[2][1],
             'imagen': args[1][0],
         },
         {
             'titulo': args[0][1],
-            'texto': args[2][1],
+            'texto': args[2][2],
             'imagen': args[1][1],
         },
         {
             'titulo': args[0][2],
-            'texto': args[2][2],
+            'texto': args[2][0],
             'imagen': args[1][2],
         },        
         ]
@@ -155,7 +157,7 @@ def main():
 
         for i, dato in df.iterrows():
             col1, col2 = st.columns([2, 1])
-            col1.title(dato['titulo'])
+            col1.subheader(dato['titulo'])
             col1.write(dato['texto'])
             col2.image(dato['imagen'], width=400)    
         
