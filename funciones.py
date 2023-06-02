@@ -92,7 +92,7 @@ def arg_info(url_page,class_a, type_title, calss_type, num_notice):
             
             img = titulares_imp.find("img")
             url = img.get("src")
-            url_notice = "https://www.infobae.com/tag/argentina" + titulares_imp.find_previous("a")["href"]
+            url_notice = "https://www.infobae.com/" + titulares_imp.find_previous("a")["href"]
                
             titules_list.append(titule)
             url_list.append(url)

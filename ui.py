@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
+from funciones import *
 
 st.set_page_config(page_title = "Newsline", page_icon = ":newspaper:", layout = "wide")
 
@@ -23,6 +24,13 @@ def scrape_website(url):
         # If the request was unsuccessful, return None
         return None
 
+var = pag_categoria("infobae", "economia")
+for i in range(len(var)):
+    for j in range(len(var[i])):
+       print(var[i][j], end=' ')
+
+
+
 # Streamlit app
 def main():
 
@@ -42,10 +50,12 @@ def main():
     pages = ["Home", "Córdoba", "Argentina", "Global"]
     selected_page = st.sidebar.selectbox("Select a page", pages)
     
+    
 
     if selected_page == "Home":
         st.header("¡Well come, we are Newsline!")
         st.markdown("We have all the news you want, from **wherever** you want and **whenever** you want")
+        
 
     elif selected_page == "Córdoba":
         st.header("Córdoba news")
@@ -54,9 +64,9 @@ def main():
 
         datos = [
         {
-            'titulo': 'MESSISMO',
-            'texto': 'Messi el mejor do mundo',
-            'imagen': 'https://www.cleverfiles.com/howto/wp-content/uploads/2018/03/minion.jpg'
+            'titulo': 's',
+            'texto': 'sss',
+            'imagen': 'https://www.cleverfiles.com/howto/wp-content/uploads/2018/03/minion.jpg',
         },
         {
             'titulo': 'ANTONELISMO',
@@ -82,11 +92,23 @@ def main():
             st.header("Argentine news")
             st.markdown("Here we can find the latest news from **Argentina**")
 
+            st.subheader(var[0][2])
+            st.write(var[2][1])
+            
+
         with col2:
             option = st.selectbox(
                 "How would you like to read?",
                 ("All", "Sport", "Economy", "Society"),
             )
+            if option == "All":
+                st.image(var[0][0])
+
+            elif option == "Sport":
+                st.image(var[2][0])
+
+            elif option == "Economy":
+                st.image(var[1][0])
 
         
     
@@ -96,7 +118,6 @@ def main():
         with col1:
             st.header("Global news")
             st.markdown("Here we can find the latest news from the **World**")
-
 
         with col2:
             option = st.selectbox(
