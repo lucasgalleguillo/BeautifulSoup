@@ -6,32 +6,16 @@ from funciones import *
 
 st.set_page_config(page_title = "Newsline", page_icon = ":newspaper:", layout = "wide")
 
-def scrape_website(url):
-    # Send a GET request to the URL
-    response = requests.get(url)
-
-    # Check if the request was successful
-    if response.status_code == 200:
-        # Create a BeautifulSoup object
-        soup = BeautifulSoup(response.content, 'html.parser')
-
-        reviews = soup.find_all('div', class_='review')
-
-        # Return the extracted information
-        return reviews
-
-    else:
-        # If the request was unsuccessful, return None
-        return None
-
 cba = pag_categoria("cordoba","a")
-
 argi = pag_categoria("infobae", "inicio")
 arge = pag_categoria("infobae", "economia")
 argd = pag_categoria("infobae", "deportes")
 args = pag_categoria("infobae", "sociedad")
+gli = pag_categoria("bbc", "inicio")
+gle = pag_categoria("bbc", "economia")
+glc = pag_categoria("bbc", "ciencia")
+glcu = pag_categoria("bbc", "cultura")
 
-# Streamlit app
 def main():
 
     st.markdown(
@@ -45,7 +29,6 @@ def main():
     unsafe_allow_html=True
     )
 
-    # Create a sidebar menu
     st.sidebar.title("Menu")
     pages = ["Home", "Córdoba", "Argentina", "Global"]
     selected_page = st.sidebar.selectbox("Select a page", pages)
@@ -53,7 +36,6 @@ def main():
     if selected_page == "Home":
         st.header("¡Well come, we are Newsline!")
         st.markdown("We have all the news you want, from **wherever** you want and **whenever** you want")
-        
 
     elif selected_page == "Córdoba":
         st.header("Córdoba news")
@@ -86,8 +68,6 @@ def main():
             'imagen': cba[0][4],
         },   
         ]
-
-        
 
         # Crear un DataFrame de Pandas con los datos
         df = pd.DataFrame(datos)
@@ -136,6 +116,37 @@ def main():
             'titulo': arge[0][2],
             'texto': arge[2][0],
             'imagen': arge[1][2],
+        },
+        {
+            'titulo': argd[0][1],
+            'texto': argd[2][0],
+            'imagen': argd[1][1],
+        },
+        {
+            'titulo': argd[0][0],
+            'texto': argd[2][2],
+            'imagen': argd[1][0],
+        },
+        {
+            'titulo': argd[0][2],
+            'texto': argd[2][1],
+            'imagen': argd[1][2],
+        },
+
+        {
+            'titulo': args[0][0],
+            'texto': args[2][0],
+            'imagen': args[1][0],
+        },
+        {
+            'titulo': args[0][1],
+            'texto': args[2][1],
+            'imagen': args[1][1],
+        },
+        {
+            'titulo': args[0][2],
+            'texto': args[2][2],
+            'imagen': args[1][2],
         },        
         ]
 
@@ -146,23 +157,7 @@ def main():
             col1.title(dato['titulo'])
             col1.write(dato['texto'])
             col2.image(dato['imagen'], width=400)    
-
-        """        with col2:
-                    option = st.selectbox(
-                        "How would you like to read?",
-                        ("All", "Sport", "Economy", "Society"),
-                    )
-                    if option == "All":
-                        st.image(cba[0][0])
-
-                    elif option == "Sport":
-                        st.image(cba[2][0])
-
-                    elif option == "Economy":
-                        st.image(cba[1][0])"""
-
         
-    
     elif selected_page == "Global":
         col1, col2 = st.columns(2)
 
@@ -170,13 +165,77 @@ def main():
             st.header("Global news")
             st.markdown("Here we can find the latest news from the **World**")
 
-        with col2:
-            option = st.selectbox(
-                "How would you like to read?",
-                ("All", "Science", "Economy", "Culture"),
-            )
 
+            datos = [
+            {
+                'titulo': gli[0][0],
+                'texto': gli[2][0],
+                'imagen': gli[1][0],
+            },
+            {
+                'titulo': gli[0][1],
+                'texto': gli[2][1],
+                'imagen': gli[1][1],
+            },
+            {
+                'titulo': gli[0][2],
+                'texto': gli[2][2],
+                'imagen': gli[1][2],
+            },
+            {
+                'titulo': gle[0][0],
+                'texto': gle[2][0],
+                'imagen': gle[1][0],
+            },
+            {
+                'titulo': gle[0][1],
+                'texto': gle[2][1],
+                'imagen': gle[1][1],
+            },
+            {
+                'titulo': gle[0][2],
+                'texto': gle[2][2],
+                'imagen': gle[1][2],
+            },
+            {
+                'titulo': glc[0][0],
+                'texto': glc[2][0],
+                'imagen': glc[1][0],
+            },
+            {
+                'titulo': glc[0][1],
+                'texto': glc[2][1],
+                'imagen': glc[1][1],
+            },
+            {
+                'titulo': glc[0][2],
+                'texto': glc[2][2],
+                'imagen': glc[1][2],
+            },
+            {
+                'titulo': glcu[0][0],
+                'texto': glcu[2][0],
+                'imagen': glcu[1][0],
+            },
+            {
+                'titulo': glcu[0][1],
+                'texto': glcu[2][1],
+                'imagen': glcu[1][1],
+            },
+            {
+                'titulo': glcu[0][2],
+                'texto': glcu[2][2],
+                'imagen': glcu[1][2],
+            },
+            ]
+            df = pd.DataFrame(datos)
 
+            for i, dato in df.iterrows():
+                col1, col2 = st.columns([2, 1])
+                col1.title(dato['titulo'])
+                col1.write(dato['texto'])
+                col2.image(dato['imagen'], width=600) 
+                
 if __name__ == '__main__':
     main()
 
