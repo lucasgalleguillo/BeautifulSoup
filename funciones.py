@@ -127,7 +127,10 @@ def pag_categoria(pag, categoria):
             case "deportes":
                 return arg_info("https://www.infobae.com/deportes/","d23-story-card-ctn","h2", "div", 3)
             case "sociedad":
-                return arg_info("https://www.infobae.com/sociedad/","d23-story-card-ctn","h2", "a", 3)
+                return arg_info("https://www.infobae.com/sociedad/","d23-feed-list-card","h2", "a", 3)
         
     else:
         return cordoba_info()
+
+var=pag_categoria("infobae", "sociedad")
+print(var)
