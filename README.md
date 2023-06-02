@@ -31,6 +31,7 @@ We are going to use the followings libraries:
 * beautifulsoup4 
 * requests
 * streamlit
+* pandas
 
 ## Developers
 * Bisio Facundo
