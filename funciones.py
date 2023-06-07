@@ -1,6 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
 
+
+class Noticia:
+    def __init__(self, titulo, url, img):
+        self.titulo = titulo
+        self.url = url
+        self.img = img
+    
+
+
+
 def cordoba_info():
     page = requests.get("https://viapais.com.ar/cordoba/")
     soup = BeautifulSoup(page.content, "html.parser")
@@ -8,15 +18,13 @@ def cordoba_info():
     titulares_cba = soup.find_all("div", class_="article-inner")
 
     cont = 0
-    titules_list = list()
-    urls_list = list()
-    urls_notice = list()
+    lista_noticia = list()
 
     for titulares_imp in titulares_cba:
         if cont != 7:
             titule = titulares_imp.find(class_="article-title").text
-            img = titulares_imp.find("img")
             
+            img = titulares_imp.find("img")
             if cont == 0:
                 url = img.get("src")
             else:
@@ -25,16 +33,16 @@ def cordoba_info():
             notice = titulares_imp.find("a")
             url_notice = "https://viapais.com.ar" + notice.get("href")
             
-            titules_list.append(titule)
-            urls_list.append(url)
-            urls_notice.append(url_notice)
+
+            noticia = Noticia(titule, url_notice, url)
+            lista_noticia.append(noticia)
 
             print(url_notice)
             cont = cont +1
         else:
             break
 
-    return urls_list, titules_list, urls_notice
+    return lista_noticia
 
 # # ------------------------------------------------------------------------    
 
@@ -47,9 +55,7 @@ def mundo_info(url_page, class_li, type_titule, val):
 
     cont = 0   
 
-    titules_list = list()
-    url_list = list()
-    url_notice_list = list()
+    lista_noticia=list()
 
     for titulares_imp in titulares_mundo:
         if cont != 6:
@@ -64,20 +70,18 @@ def mundo_info(url_page, class_li, type_titule, val):
             else:
                 url_notice = notice.get("href")
                 
-            titules_list.append(titule)
-            url_list.append(url)
-            url_notice_list.append(url_notice)
-
+            noticia = Noticia(titule, url_notice, url)
+            lista_noticia.append(noticia)
+            
             cont = cont +1
         else:
             break
 
-    return titules_list, url_list,url_notice_list
+    return lista_noticia
     
 # # ------------------------------------------------------------------------    
 
-
-def arg_info(url_page,class_a, type_title, calss_type, num_notice):
+def arg_info(url_page,class_a, type_title, calss_type):
     page = requests.get(url_page)
     soup = BeautifulSoup(page.content, "html.parser")
 
@@ -85,30 +89,28 @@ def arg_info(url_page,class_a, type_title, calss_type, num_notice):
 
     cont = 0
 
-    titules_list = list()
-    url_list = list()
-    url_notice_list = list()
+    lista_noticia = list()
 
     for titulares_imp in titulares_arg:
-        if cont != num_notice:
+        if cont != 3:
             titule = titulares_imp.find(type_title).text
             
             img = titulares_imp.find("img")
             url = img.get("src")
+            
             url_notice = "https://www.infobae.com/" + titulares_imp.find_previous("a")["href"]
                
-            titules_list.append(titule)
-            url_list.append(url)
-            url_notice_list.append(url_notice)
+            noticia = Noticia(titule, url_notice, url)
+            lista_noticia.append(noticia)
 
             cont = cont +1
         else:
             break
 
-    return titules_list, url_list, url_notice_list
+    return lista_noticia
     
+# # ------------------------------------------------------------------------    
             
-
 def pag_categoria(pag, categoria):
     if pag == "bbc":
         match categoria:
@@ -124,13 +126,13 @@ def pag_categoria(pag, categoria):
     elif pag=="infobae":
         match categoria:
             case "inicio":
-                return arg_info("https://www.infobae.com/tag/argentina", "d23-feed-list-card", "h2", "a", 3)
+                return arg_info("https://www.infobae.com/tag/argentina", "d23-feed-list-card", "h2", "a")
             case "economia":
-                return arg_info("https://www.infobae.com/economia/", "d23-story-card-ctn", "h2", "div", 3)
+                return arg_info("https://www.infobae.com/economia/", "d23-story-card-ctn", "h2", "div")
             case "deportes":
-                return arg_info("https://www.infobae.com/deportes/","d23-story-card-ctn","h2", "div", 3)
+                return arg_info("https://www.infobae.com/deportes/","d23-story-card-ctn","h2", "div")
             case "sociedad":
-                return arg_info("https://www.infobae.com/sociedad/","d23-feed-list-card","h2", "a", 3)
+                return arg_info("https://www.infobae.com/sociedad/","d23-feed-list-card","h2", "a")
         
     else:
         return cordoba_info()

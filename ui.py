@@ -42,33 +42,14 @@ def main():
         st.header("Noticias de Córdoba")
         st.markdown("Podrás encontrar las últimas noticias de **Córdoba**")
         
-        datos = [
-        {
-            'titulo': cba[1][0],
-            'texto': cba[2][0],
-            'imagen': cba[0][0],
-        },
-        {
-            'titulo': cba[1][1],
-            'texto': cba[2][1],
-            'imagen': cba[0][1],
-        },    
-        {
-            'titulo': cba[1][2],
-            'texto': cba[2][2],
-            'imagen': cba[0][2],
-        },
-        {
-            'titulo': cba[1][3],
-            'texto': cba[2][3],
-            'imagen': cba[0][3],
-        },   
-        {
-            'titulo': cba[1][4],
-            'texto': cba[2][4],
-            'imagen': cba[0][4],
-        },   
-        ]
+        datos = []
+        for i in range(7):
+            var ={
+            'titulo': cba[i].titulo,
+            'texto': cba[i].url,
+            'imagen': cba[i].img,
+        }
+            datos.append(var)
 
         # Crear un DataFrame de Pandas con los datos
         df = pd.DataFrame(datos)
