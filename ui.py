@@ -16,6 +16,26 @@ gle = pag_categoria("bbc", "economia")
 glc = pag_categoria("bbc", "ciencia")
 glcu = pag_categoria("bbc", "cultura")
 
+
+def categoria(categoria, num):
+    datos = []
+    for i in range(num):
+        var ={
+            'titulo': categoria[i].titulo,
+            'texto': categoria[i].url,
+            'imagen': categoria[i].img,
+        }
+        datos.append(var)
+
+    # Crear un DataFrame de Pandas con los datos
+    df = pd.DataFrame(datos)
+
+    for i, dato in df.iterrows():
+        col1, col2 = st.columns([2, 1])
+        col1.subheader(dato['titulo'])
+        col1.write(dato['texto'])
+        col2.image(dato['imagen'], width=400)
+
 def main():
 
     st.markdown(
@@ -42,23 +62,7 @@ def main():
         st.header("Noticias de Córdoba")
         st.markdown("Podrás encontrar las últimas noticias de **Córdoba**")
         
-        datos = []
-        for i in range(7):
-            var ={
-            'titulo': cba[i].titulo,
-            'texto': cba[i].url,
-            'imagen': cba[i].img,
-        }
-            datos.append(var)
-
-        # Crear un DataFrame de Pandas con los datos
-        df = pd.DataFrame(datos)
-
-        for i, dato in df.iterrows():
-            col1, col2 = st.columns([2, 1])
-            col1.subheader(dato['titulo'])
-            col1.write(dato['texto'])
-            col2.image(dato['imagen'], width=400)
+        categoria(cba, 7)
 
     elif selected_page == "Argentina":
         col1, col2 = st.columns(2)
@@ -67,81 +71,11 @@ def main():
             st.header("Noticias de Argentina")
             st.markdown("Podrás encontrar las últimas noticias de **Argentina**")
 
-        datos = [
+        categoria(argi, 3)    
+        categoria(arge, 3)
+        categoria(argd, 3)
+        categoria(args, 3)
 
-        {
-            'titulo': argi[0][0],
-            'texto': argi[2][1],
-            'imagen': argi[1][0],
-        },
-        {
-            'titulo': argi[0][1],
-            'texto': argi[2][2],
-            'imagen': argi[1][1],
-        },
-        {
-            'titulo': argi[0][2],
-            'texto': argi[2][0],
-            'imagen': argi[1][2],
-        },
-#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""#
-        {
-            'titulo': arge[0][0],
-            'texto': arge[2][1],
-            'imagen': arge[1][0],
-        },
-        {
-            'titulo': arge[0][1],
-            'texto': arge[2][2],
-            'imagen': arge[1][1],
-        },
-        {
-            'titulo': arge[0][2],
-            'texto': arge[2][0],
-            'imagen': arge[1][2],
-        },
-#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""#
-        {
-            'titulo': argd[0][0],
-            'texto': argd[2][1],
-            'imagen': argd[1][0],
-        },
-        {
-            'titulo': argd[0][1],
-            'texto': argd[2][2],
-            'imagen': argd[1][1],
-        },
-        {
-            'titulo': argd[0][2],
-            'texto': argd[2][0],
-            'imagen': argd[1][2],
-        },
-#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""#
-        {
-            'titulo': args[0][0],
-            'texto': args[2][1],
-            'imagen': args[1][0],
-        },
-        {
-            'titulo': args[0][1],
-            'texto': args[2][2],
-            'imagen': args[1][1],
-        },
-        {
-            'titulo': args[0][2],
-            'texto': args[2][0],
-            'imagen': args[1][2],
-        },        
-        ]
-
-        df = pd.DataFrame(datos)
-
-        for i, dato in df.iterrows():
-            col1, col2 = st.columns([2, 1])
-            col1.subheader(dato['titulo'])
-            col1.write(dato['texto'])
-            col2.image(dato['imagen'], width=400)    
-        
     elif selected_page == "Global":
         col1, col2 = st.columns(2)
 
@@ -149,77 +83,10 @@ def main():
             st.header("Noticias Globales")
             st.markdown("Podrás encontrar las últimas noticias del **Mundo**")
 
-
-            datos = [
-            {
-                'titulo': gli[0][0],
-                'texto': gli[2][0],
-                'imagen': gli[1][0],
-            },
-            {
-                'titulo': gli[0][1],
-                'texto': gli[2][1],
-                'imagen': gli[1][1],
-            },
-            {
-                'titulo': gli[0][2],
-                'texto': gli[2][2],
-                'imagen': gli[1][2],
-            },
-            {
-                'titulo': gle[0][0],
-                'texto': gle[2][0],
-                'imagen': gle[1][0],
-            },
-            {
-                'titulo': gle[0][1],
-                'texto': gle[2][1],
-                'imagen': gle[1][1],
-            },
-            {
-                'titulo': gle[0][2],
-                'texto': gle[2][2],
-                'imagen': gle[1][2],
-            },
-            {
-                'titulo': glc[0][0],
-                'texto': glc[2][0],
-                'imagen': glc[1][0],
-            },
-            {
-                'titulo': glc[0][1],
-                'texto': glc[2][1],
-                'imagen': glc[1][1],
-            },
-            {
-                'titulo': glc[0][2],
-                'texto': glc[2][2],
-                'imagen': glc[1][2],
-            },
-            {
-                'titulo': glcu[0][0],
-                'texto': glcu[2][0],
-                'imagen': glcu[1][0],
-            },
-            {
-                'titulo': glcu[0][1],
-                'texto': glcu[2][1],
-                'imagen': glcu[1][1],
-            },
-            {
-                'titulo': glcu[0][2],
-                'texto': glcu[2][2],
-                'imagen': glcu[1][2],
-            },
-            ]
-            df = pd.DataFrame(datos)
-
-            for i, dato in df.iterrows():
-                col1, col2 = st.columns([2, 1])
-                col1.subheader(dato['titulo'])
-                col1.write(dato['texto'])
-                col2.image(dato['imagen'], width=400) 
+            categoria(gli, 3)
+            categoria(gle, 3)
+            categoria(glc, 3)
+            categoria(glcu, 3)
 
 if __name__ == '__main__':
     main()
-
