@@ -97,8 +97,12 @@ def arg_info(url_page,class_a, type_title, calss_type):
             
             img = titulares_imp.find("img")
             url = img.get("src")
-            
-            url_notice = "https://www.infobae.com/" + titulares_imp.find_previous("a")["href"]
+        
+            if calss_type == 'div':
+                a = titulares_imp.find("a")
+                url_notice = "https://www.infobae.com" + a.get("href")
+            elif calss_type == 'a':
+                url_notice = "https://www.infobae.com" + titulares_imp.get("href")
                
             noticia = Noticia(titule, url_notice, url)
             lista_noticia.append(noticia)
@@ -136,4 +140,3 @@ def pag_categoria(pag, categoria):
         
     else:
         return cordoba_info()
-
